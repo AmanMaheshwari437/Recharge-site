@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Free Recharge</title>
+  <style> 
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Free Recharge!</h1>
+    <form id="rechargeForm">
+      <label for="phone">Enter your phone number:</label>
+      <input type="tel" id="phone" name="phone" required>
+<br><br>
+      <label for="sim">Select your sim type:</label>
+      <select id="sim" name="sim" required>
+        <option value="prepaid">Prepaid</option>
+        <option value="postpaid">Postpaid</option>
+      </select>
+<br><br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <script>
+   document.getElementById("rechargeForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const phoneNumber = document.getElementById("phone").value;
+  const simType = document.getElementById("sim").value;
+
+  // Send data to server for processing
+  fetch("process.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: `phone=${phoneNumber}&sim=${simType}`,
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Display fake recharge status (modify as needed)
+    alert(`Fake Recharge Status: ${data.status}`);
+  });
+
+  // Clear form fields after submission
+  document.getElementById("rechargeForm").reset();
+});
+    
+ </script>
+  
+</body>
+</html>
+  
